@@ -1,0 +1,75 @@
+# Assignment 1
+# 9-1-2022
+# Collin Shook
+
+# ask for first name and last name
+firstName = input("Please Enter Your First Name:\n")
+lastName = input("Please Enter Your Last Name:\n")
+
+fullName = firstName + " " + lastName
+
+print("Welcome To My Program " + fullName + "!")
+
+print("\n------------------------\n")
+
+# f to c
+f = float(input("Please Enter A Tempurature in Fahrenheit:\n"))
+
+c = round((5.0 / 9.0) * (f - 32), 2)
+print(str(f) + "°F is " + str(c)+ "°C")
+
+print("\n------------------------\n")
+
+# c to f
+c = float(input("Please Enter A Tempurature in Celsus:\n"))
+
+f = round((9.0 / 5.0) * c + 32, 2)
+print(str(c) + "°C is " + str(f)+ "°F")
+
+print("\n------------------------\n")
+
+# mph to knt
+mph = float(input("Please Enter A Speed in Miles Per Hour:\n"))
+
+knt = round(mph * 1.1, 2)
+
+print(str(mph) + " mph is " + str(knt)+ " knts")
+
+print("\n------------------------\n")
+
+# knt to mph 
+knt = float(input("Please Enter A Speed in Knots:\n"))
+
+mph = round(knt / 1.1, 2)
+
+print(str(knt) + " knts is " + str(mph)+ " mph")
+
+print("\n------------------------\n")
+
+# avg 3 numbers
+print("Please enter three numbers to average:\n")
+
+a = float(input("First Number: "))
+b = float(input("Second Number: "))
+c = float(input("Third Number: "))
+
+avg = round((a + b + c) / 3.0, 2)
+
+print("The average of your three numbers is " + str(avg))
+
+print("\n------------------------\n")
+
+# board foot calc
+print("Please enter parameters to calculate board feet. Please use inches:\n")
+
+l = float(input("Length: "))
+w = float(input("Width: "))
+h = float(input("Thickness: "))
+
+bdft = round((l * w * h) / 144.0 , 2)
+
+print("The board feet of your piece is " + str(bdft) + " bdft.")
+
+# end of program
+
+print("\n\n\nThis is the end of the program! Goodbye!\n")

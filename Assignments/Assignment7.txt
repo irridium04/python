@@ -1,0 +1,131 @@
+# Collin Shook
+# November 10, 2022
+# Assignment 7
+
+import numpy as np
+import sys
+
+
+def main():
+    CreateSpreadsheet()
+
+
+def CreateSpreadsheet():
+    validInput = False
+
+    while(not validInput):
+        try:
+            rows = int(input("Enter the amount of rows for the spreadsheet!\n"))
+            cols = int(input("Enter the amount of columns for the spreadsheet!\n"))
+            if(rows <= 0 or cols <= 0):
+                print("Rows and Columns Must Be A Positive Value!")
+            else:
+                validInput = True
+            
+        except:
+            print("Invalid Input")
+
+
+    arr = np.zeros([rows, cols], dtype=int)
+
+    PrintArray(arr)
+
+    shouldContinue = "y"
+
+    while(shouldContinue == "y"):
+        EditArray(arr)
+
+        shouldContinue = input("Enter 'y' to continue. Press any other key to exit!\n").lower()
+
+    PrintArray(arr)
+
+    print("Spreadsheet Stats:\n\n")
+    print(f"Max: {arr.max()}")
+    print(f"Min: {arr.min()}")
+    print(f"Std: {arr.std().round(4)}")
+    print()
+    print("Thank you for using my spreadsheet software!\n\n")
+
+def PrintArray(anArray):
+    
+
+    for i in range(anArray.shape[1] + 1):
+        if(i == 0):
+            sys.stdout.write("      ")
+        else:
+            colTotal = 0
+            for r in range(anArray.shape[0]):
+                colTotal += anArray[r, i - 1]
+
+            sys.stdout.write(f"\033[1m{str(i).rjust(len(str(colTotal)) + 2)}\033[0m")
+    sys.stdout.write(f"\033[1m " + "  Total" + "\033[0m")
+    print()
+    for row in range(anArray.shape[0]):
+        rowTotal = 0
+        sys.stdout.write(f"\033[1m{str(row + 1).rjust(6)}\033[0m")
+        for col in range(anArray.shape[1]):
+            colTotal = 0
+            for r in range(anArray.shape[0]):
+                colTotal += anArray[r, col]
+                
+            sys.stdout.write(str(anArray[row, col]).rjust(len(str(colTotal)) + 2))
+            rowTotal += anArray[row, col]
+
+        sys.stdout.write("   ")
+        sys.stdout.write(f"\033[1m{str(rowTotal)}\033[0m")
+
+        print()
+    sys.stdout.write(f"\033[1m " + "Total" + "\033[0m")
+    for col in range(anArray.shape[1]):
+        colTotal = 0
+        for row in range(anArray.shape[0]):
+            colTotal += anArray[row, col]
+
+        sys.stdout.write(
+            f"\033[1m{str(colTotal).rjust(len(str(colTotal)) + 2)}\033[0m")
+
+    sys.stdout.write("   ")
+    sys.stdout.write(f"\033[1;3m{str(anArray.sum())}\033[0m")
+    print()
+
+
+def EditArray(anArray):
+    validInput = False
+
+    while (not validInput):
+        try:
+            row = int(input(f"Enter row to edit (1-{str(anArray.shape[0])})!\n"))
+            col = int(input(f"Enter column to edit (1-{str(anArray.shape[1])})!\n"))
+            if (row <= 0 or col <= 0 or row > anArray.shape[0] or col > anArray.shape[1]):
+                print("Out Of Range!")
+            else:
+                validInput = True
+
+        except:
+            print("Invalid Input")
+
+    validInput = False
+
+    while (not validInput):
+        try:
+            num = int(input(f"Enter Value For Row {row}, Col {col}!\n"))
+            validInput = True
+        except:
+            print("Not an Integer!")
+
+    try:
+        anArray[row - 1, col - 1] = num
+        print(f"Sucessfully set value of row {row}, col {col} to {num}!")
+        PrintArray(anArray)
+
+    except Exception as e:
+        print(f"""
+Could not save value at row {row}, col {col}!
+
+Error info:
+\033[1;3m{e}\033[0m
+""")
+
+
+
+main()
